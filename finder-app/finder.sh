@@ -13,10 +13,14 @@ then
     exit 1
 else
     cd $filesdir
+    declare -i fileCounter=0
+    declare -i countLines=0
     for FILE in *;
     do
-        cat $FILE | grep "${searchstr}";
+        ((fileCounter++))
+        countLines+=$(cat $FILE | grep -c "${searchstr}");
     done 
+    echo "The number of files are ${fileCounter} and the number of matching lines are ${countLines}"
     exit 0
 fi
 
